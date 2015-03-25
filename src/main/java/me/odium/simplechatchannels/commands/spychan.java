@@ -32,7 +32,7 @@ public class spychan implements CommandExecutor {
         return true;
       }
 
-    } else if (args.length == 1) { // if channel to spy on specified      
+    } else if (args.length >= 1) { // if channel to spy on specified
       String spyChannel = args[0]; 
       if (plugin.SpyMap.containsKey(player) && plugin.SpyMap.get(player).equalsIgnoreCase(spyChannel)) { // if player already spying on specified channel
         plugin.SpyMap.remove(player); // stop spying
@@ -40,7 +40,7 @@ public class spychan implements CommandExecutor {
         return true;
       }
       boolean channelCheck = plugin.getStorageConfig().contains(spyChannel); // check if channel exists
-      if(channelCheck == false) { // if not
+      if(!channelCheck) { // if not
         plugin.NotExist(sender, spyChannel); // tell player it doesn't exist and finish
         return true;      
       } else { // otherwise

@@ -50,9 +50,9 @@ public class Loader extends JavaPlugin {
   public ChatColor GOLD = ChatColor.GOLD;
 
 
-  public Map<Player, String> ChannelMap = new HashMap<Player, String>();
-  public Map<Player, Boolean> InChannel = new HashMap<Player, Boolean>();
-  public Map<Player, String> SpyMap = new HashMap<Player, String>();
+  public PlayerAdapterMap<String> ChannelMap = new PlayerAdapterMap<String>();
+  public PlayerAdapterMap<Boolean> InChannel = new PlayerAdapterMap<Boolean>();
+  public PlayerAdapterMap<String> SpyMap = new PlayerAdapterMap<String>();
   public int overRide = 0;
 
   // Custom Config  

@@ -74,12 +74,12 @@ public class PListener implements Listener {
       log.info("[" + Chan + " / " + player.getDisplayName() + "]" + message); // log the message to console
 
       Player[] players = Bukkit.getOnlinePlayers(); // get all online players      
-      List<String> ChanList = plugin.getStorageConfig().getStringList(Chan+".list"); // get the list of users in channel
+      //List<String> ChanList = plugin.getStorageConfig().getStringList(Chan+".list"); // get the list of users in channel
 
       String prefixTemp = plugin.getConfig().getString("ChatPrefix.Prefix").replace("`player", player.getDisplayName()).replace("`channel", Chan);      
       String prefix = plugin.replaceColorMacros(prefixTemp); 
 
-      for(Player op : players){        
+      /*for(Player op : players){
         if (plugin.SpyMap.containsKey(op)) { // If player is using spychan
           if (plugin.SpyMap.get(op) == "all" || plugin.SpyMap.get(op).equalsIgnoreCase(Chan)) { // if player is spying on all or specific channel being used
             op.sendMessage(ChatColor.RED+"SPY: "+ChatColor.RESET+prefix +" "+ message); // send them the channel message
@@ -89,6 +89,18 @@ public class PListener implements Listener {
 
         if(ChanList.contains(op.getName().toLowerCase())) { // if the channel list contains the name of an online player
           op.sendMessage(prefix +" "+ message); // send them the channel message
+        }
+      }*/
+
+      for(Player spy : players){
+        if(spy == null) continue;
+        if(plugin.SpyMap.containsKey(spy)){
+          if(plugin.SpyMap.get(spy) != null &&
+                  plugin.SpyMap.get(spy).equalsIgnoreCase("all") || plugin.SpyMap.get(spy).equalsIgnoreCase(Chan)){
+
+            //Player is spying on this channel, time to message them.
+            spy.sendMessage(ChatColor.RED+"SPY: "+ChatColor.RESET+prefix +" "+ message);
+          }
         }
       }
       chat.setCancelled(true); // cancel the message for everyone else
